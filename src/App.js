@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
 
 class App extends Component {
@@ -21,11 +22,12 @@ class App extends Component {
   handleAddToList = () => {
 
     const todoItem = {
-
+      isDone: false,
+      text: this.state.inputValue
     };
 
     this.setState({
-      todoList: [...this.state.todoList, this.state.inputValue]
+      todoList: [...this.state.todoList, todoItem]
     });
 
     this.clearInput();
@@ -35,6 +37,22 @@ class App extends Component {
     this.setState({
       inputValue: ''
     });
+
+  };
+
+  handleItemDone = (itemNumber) => {
+
+    let { todoList } = this.state;
+
+    let todoListNew = todoList;
+
+    todoListNew[itemNumber].isDone = !todoListNew[itemNumber].isDone;
+
+    console.log(todoListNew);
+
+    this.setState({
+      todoList: todoList
+    });
   };
 
   render() {
@@ -42,6 +60,13 @@ class App extends Component {
     const { inputValue, todoList } = this.state;
 
     console.log(todoList);
+
+    const list = todoList.map((item, i) => (
+      <li htmlFor={`todo-number-${i}`} key={`todo-number-${i}`}>
+        <input type="checkbox" id={`todo-number-${i}`} onChange={this.handleItemDone} checked={item.isDone ? 'checked' : ''}/>
+        {item.text}
+      </li>
+    ));
 
     return (
       <div className="App">
@@ -54,21 +79,12 @@ class App extends Component {
             <ul>
               {
                 !!todoList.length ? (
-                    <ul>
-                      {
-                        todoList.map((item, i) => (
-                          <li htmlFor={`todo-number-${i}`} key={`todo-number-${i}`}>
-                            <input type="checkbox" id={`todo-number-${i}`} onClick={() => alert(1)}/>
-                            {item}
-                          </li>
-                        ))
-                      }
-                    </ul>
-                  ) : (
-                    <div>
-                      empty
-                    </div>
-                  )
+                  <ul>{ list }</ul>
+                ) : (
+                  <div>
+                    empty
+                  </div>
+                )
               }
             </ul>
 
