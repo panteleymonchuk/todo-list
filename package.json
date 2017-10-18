@@ -1,0 +1,18 @@
+{
+  "name": "todo-list",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "create-react-app-sass": "^1.1.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14",
+    "reactjs-admin-lte": "^0.5.1"
+  },
+  "scripts": {
+    "start": "react-scripts-with-sass start",
+    "build": "react-scripts-with-sass build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
