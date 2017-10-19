@@ -27,12 +27,18 @@ class App extends Component {
 
   _handleTodoItemAdd(todoItemVal) {
 
+    const todoItem = {
+      isDone: false,
+      value: todoItemVal
+    };
 
-    console.log(todoItemVal)
+    this.setState({
+      todoItems: [...this.state.todoItems, todoItem]
+    });
   }
 
   render() {
-
+    console.log(this.state.todoItems);
     return (
       <div className="App">
         <Row align="center">
