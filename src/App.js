@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import {
+  Checkbox,
+  Col,
+  Row,
+  FormGroup,
+  Button,
+} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap-theme.min.css';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +17,8 @@ class App extends Component {
 
     this.state = {
       inputValue: '',
-      todoList: []
+      todoList: [],
+      innerId: 0
     };
   }
 
@@ -19,15 +28,17 @@ class App extends Component {
     });
   };
 
-  handleAddToList = () => {
+  handleAddToList = (id) => {
 
     const todoItem = {
+      id: id,
       isDone: false,
       text: this.state.inputValue
     };
 
     this.setState({
-      todoList: [...this.state.todoList, todoItem]
+      todoList: [...this.state.todoList, todoItem],
+      innerId: ++this.state.innerId
     });
 
     this.clearInput();
@@ -37,19 +48,15 @@ class App extends Component {
     this.setState({
       inputValue: ''
     });
-
   };
+
 
   handleItemDone = (itemNumber) => {
 
     let { todoList } = this.state;
 
-    let todoListNew = todoList;
-
-    todoListNew[itemNumber].isDone = !todoListNew[itemNumber].isDone;
-
-    console.log(todoListNew);
-
+    todoList[itemNumber].isDone = !todoList[itemNumber].isDone;
+    console.log(todoList);
     this.setState({
       todoList: todoList
     });
@@ -59,37 +66,45 @@ class App extends Component {
 
     const { inputValue, todoList } = this.state;
 
-    console.log(todoList);
-
-    const list = todoList.map((item, i) => (
-      <li htmlFor={`todo-number-${i}`} key={`todo-number-${i}`}>
-        <input type="checkbox" id={`todo-number-${i}`} onChange={this.handleItemDone} checked={item.isDone ? 'checked' : ''}/>
-        {item.text}
+    const listTodo = todoList.filter(item => !item.isDone).map((item, i) => (
+      <li key={`todo-number-${i}`} className="todo-list__item">
+        <Checkbox
+          onChange={() => this.handleItemDone(item.id)}
+          defaultChecked={item.isDone}
+        >
+          {item.text}
+        </Checkbox>
       </li>
     ));
 
     return (
       <div className="App">
-        <div className="todo">
-          <div className="todo-input">
-            <input type="text" value={inputValue} onChange={this.onInputChange}/>
-            <button onClick={this.handleAddToList}>Add</button>
-          </div>
-          <div className="todo-list">
-            <ul>
-              {
-                !!todoList.length ? (
-                  <ul>{ list }</ul>
-                ) : (
-                  <div>
-                    empty
-                  </div>
-                )
-              }
-            </ul>
+        <Row align="center">
+          <Col md={4} mdPush={4}>
+            <div className="todo">
+              <div className="todo-input">
 
-          </div>
-        </div>
+                <FormGroup>
+                  <input type="text" value={inputValue} onChange={this.onInputChange}/>
+                  <Button onClick={() => this.handleAddToList(this.state.innerId)} bsSize="small">Add</Button>
+                </FormGroup>
+              </div>
+              <div className="todo-list">
+                <ul>
+                  {
+                    !!todoList.length ? (
+                      <ul>{ listTodo }</ul>
+                    ) : (
+                      <div>
+                        empty
+                      </div>
+                    )
+                  }
+                </ul>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </div>
     );
   }
