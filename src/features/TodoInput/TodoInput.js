@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class TodoInput extends Component {
 
@@ -10,6 +10,7 @@ class TodoInput extends Component {
     };
 
     this._onInputChange = this._onInputChange.bind(this);
+    this._clearInput = this._clearInput.bind(this);
   }
 
   _onInputChange(event) {
@@ -18,13 +19,29 @@ class TodoInput extends Component {
     });
   }
 
+  _clearInput() {
+    this.setState({
+      inputValue: ''
+    });
+  }
+
   render() {
 
     const {inputValue} = this.state;
 
+    const {handleTodoItemAdd} = this.props;
+
     return (
       <div className="todo-input">
         <input type="text" value={inputValue} onChange={this._onInputChange}/>
+        <button
+          onClick={() => {
+            handleTodoItemAdd(inputValue);
+            this._clearInput();
+          }}
+        >
+          add
+        </button>
       </div>
     )
   }

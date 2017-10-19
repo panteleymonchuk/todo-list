@@ -19,22 +19,19 @@ class App extends Component {
     super();
 
     this.state = {
-      inputValue: '',
-      listItems: []
+      todoItems: []
     };
 
-    this._onInputChange = this._onInputChange.bind(this);
+    this._handleTodoItemAdd = this._handleTodoItemAdd.bind(this);
   }
 
-  _onInputChange(e) {
-    this.setState({
-      inputValue: e.target.value
-    });
-  };
+  _handleTodoItemAdd(todoItemVal) {
+
+
+    console.log(todoItemVal)
+  }
 
   render() {
-
-    const {inputValue} = this.state;
 
     return (
       <div className="App">
@@ -43,13 +40,8 @@ class App extends Component {
             <div className="todo">
 
               <TodoInput
-                inputValue={inputValue}
-                onInputChange={this._onInputChange}
+                handleTodoItemAdd={this._handleTodoItemAdd}
               />
-
-              {/*<TodoList*/}
-                {/*listTodo={todoList}*/}
-              {/*/>*/}
 
             </div>
           </Col>
