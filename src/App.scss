@@ -1,5 +1,4 @@
 body {
-  background: rgba(0, 0, 0, 0.2);
 }
 
 ul {
@@ -15,13 +14,18 @@ li {
 }
 
 .todo-list {
+
   &__item {
     text-align: left;
     margin-top: 15px;
-    padding: 5px;
-    background: #a5ffec;
+    border: 1px solid #2aabd2;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+  }
+
+  &__checkbox {
+    padding: 5px;
+    margin: 0;
   }
 }

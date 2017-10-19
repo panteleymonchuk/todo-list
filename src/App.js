@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import TodoList from './features/TodoList/TodoList';
+import TodoInput from './features/TodoInput/TodoInput.js';
+
 import {
   Checkbox,
   Col,
@@ -17,91 +20,37 @@ class App extends Component {
 
     this.state = {
       inputValue: '',
-      todoList: [],
-      innerId: 0
+      listItems: []
     };
+
+    this._onInputChange = this._onInputChange.bind(this);
   }
 
-  onInputChange = (e) => {
+  _onInputChange(e) {
     this.setState({
       inputValue: e.target.value
     });
   };
 
-  handleAddToList = (id) => {
-
-    const todoItem = {
-      id: id,
-      isDone: false,
-      text: this.state.inputValue
-    };
-
-    this.setState({
-      todoList: [...this.state.todoList, todoItem],
-      innerId: ++this.state.innerId
-    });
-
-    this.clearInput();
-  };
-
-  clearInput = () => {
-    this.setState({
-      inputValue: ''
-    });
-  };
-
-
-  handleItemDone = (itemNumber) => {
-
-    let { todoList } = this.state;
-
-    todoList[itemNumber].isDone = !todoList[itemNumber].isDone;
-    console.log(todoList);
-    this.setState({
-      todoList: todoList
-    });
-  };
-
   render() {
 
-    const { inputValue, todoList } = this.state;
-
-    const listTodo = todoList.filter(item => !item.isDone).map((item, i) => (
-      <li key={`todo-number-${i}`} className="todo-list__item">
-        <Checkbox
-          onChange={() => this.handleItemDone(item.id)}
-          defaultChecked={item.isDone}
-        >
-          {item.text}
-        </Checkbox>
-      </li>
-    ));
+    const {inputValue} = this.state;
 
     return (
       <div className="App">
         <Row align="center">
           <Col md={4} mdPush={4}>
             <div className="todo">
-              <div className="todo-input">
 
-                <FormGroup>
-                  <input type="text" value={inputValue} onChange={this.onInputChange}/>
-                  <Button onClick={() => this.handleAddToList(this.state.innerId)} bsSize="small">Add</Button>
-                </FormGroup>
-              </div>
-              <div className="todo-list">
-                <ul>
-                  {
-                    !!todoList.length ? (
-                      <ul>{ listTodo }</ul>
-                    ) : (
-                      <div>
-                        empty
-                      </div>
-                    )
-                  }
-                </ul>
-              </div>
+              <TodoInput
+                inputValue={inputValue}
+                onInputChange={this._onInputChange}
+              />
+
+              {/*<TodoList*/}
+                {/*listTodo={todoList}*/}
+              {/*/>*/}
+
             </div>
           </Col>
         </Row>
