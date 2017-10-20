@@ -12,10 +12,10 @@ class TodoList extends Component {
       handleTodoItemToggle
     } = this.props;
 
-    const listTodo = todoItems.map((item, i) => (
+    const listTodo = todoItems.filter(item => !item.isDone).map((item, i) => (
       <li key={`todo-number-${i}`} className="todo-list__item">
         <Checkbox
-          onChange={() => handleTodoItemToggle(i)}
+          onChange={() => handleTodoItemToggle(item.id)}
           checked={item.isDone}
           className="todo-list__checkbox"
         >

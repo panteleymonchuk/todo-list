@@ -16,6 +16,7 @@ class App extends Component {
     super();
 
     this.state = {
+      maxItemId: 0,
       todoItems: []
     };
 
@@ -30,12 +31,16 @@ class App extends Component {
    */
   _handleTodoItemAdd(todoItemVal) {
 
+    let {maxItemId} = this.state;
+
     const todoItem = {
+      id: maxItemId,
       isDone: false,
       value: todoItemVal
     };
 
     this.setState({
+      maxItemId: ++maxItemId,
       todoItems: [...this.state.todoItems, todoItem]
     });
   }
@@ -59,6 +64,9 @@ class App extends Component {
   }
 
   render() {
+
+    console.log(this.state.maxItemId);
+
     return (
       <div className="App">
         <Row align="center">
