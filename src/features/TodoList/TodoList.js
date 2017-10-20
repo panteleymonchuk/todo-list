@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import {
   Checkbox,
-  Col,
-  Row,
-  FormGroup,
-  Button,
 } from 'react-bootstrap';
 
 class TodoList extends Component {
@@ -13,17 +9,13 @@ class TodoList extends Component {
 
     const {
       todoItems,
-      handleTodoItemDone
+      handleTodoItemToggle
     } = this.props;
-
-    // const todoItemsList =
-
-    console.log(todoItems);
 
     const listTodo = todoItems.map((item, i) => (
       <li key={`todo-number-${i}`} className="todo-list__item">
         <Checkbox
-          onChange={() => handleTodoItemDone(i)}
+          onChange={() => handleTodoItemToggle(i)}
           checked={item.isDone}
           className="todo-list__checkbox"
         >

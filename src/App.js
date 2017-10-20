@@ -23,6 +23,11 @@ class App extends Component {
     this._handleTodoItemDone = this._handleTodoItemDone.bind(this);
   }
 
+  /**
+   * Adding element to the todoList
+   * @param {string} todoItemVal - value to add to the list
+   * @private
+   */
   _handleTodoItemAdd(todoItemVal) {
 
     const todoItem = {
@@ -35,7 +40,13 @@ class App extends Component {
     });
   }
 
-  _handleTodoItemDone(itemOrderNumber) {
+
+  /**
+   * Toggle of state isDone in item from todoList
+   * @param {number} itemOrderNumber - index of element who checked
+   * @private
+   */
+  _handleTodoItemToggle(itemOrderNumber) {
 
     let {todoItems} = this.state;
 
@@ -60,7 +71,7 @@ class App extends Component {
 
               <TodoList
                 todoItems={this.state.todoItems}
-                handleTodoItemDone={this._handleTodoItemDone}
+                handleTodoItemToggle={this._handleTodoItemToggle}
               />
 
             </div>
