@@ -17,11 +17,13 @@ class App extends Component {
 
     this.state = {
       maxItemId: 0,
+      isCompletedHidden: true,
       todoItems: []
     };
 
     this._handleTodoItemAdd = this._handleTodoItemAdd.bind(this);
     this._handleTodoItemToggle = this._handleTodoItemToggle.bind(this);
+    this._handleCompletedHiddenToggle = this._handleCompletedHiddenToggle.bind(this);
   }
 
   /**
@@ -63,6 +65,17 @@ class App extends Component {
 
   }
 
+
+  /**
+   * Toggle with show/hide completed tasks
+   * @private
+   */
+  _handleCompletedHiddenToggle() {
+    this.setState({
+      isCompletedHidden: !this.state.isCompletedHidden
+    })
+  }
+
   render() {
 
     console.log(this.state.maxItemId);
@@ -80,6 +93,8 @@ class App extends Component {
               <TodoList
                 todoItems={this.state.todoItems}
                 handleTodoItemToggle={this._handleTodoItemToggle}
+                handleCompletedHiddenToggle={this._handleCompletedHiddenToggle}
+                isCompletedHidden={this.state.isCompletedHidden}
               />
 
             </div>
