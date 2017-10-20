@@ -11,28 +11,31 @@ class TodoList extends Component {
 
   render() {
 
-    const {todoItems} = this.props;
+    const {
+      todoItems,
+      handleTodoItemDone
+    } = this.props;
 
     // const todoItemsList =
 
     console.log(todoItems);
-    //
-    // const listTodo = todoList.filter(item => !item.isDone).map((item, i) => (
-    //   <li key={`todo-number-${i}`} className="todo-list__item">
-    //     <Checkbox
-    //       onChange={() => this.handleItemDone(item.id)}
-    //       defaultChecked={item.isDone}
-    //       className="todo-list__checkbox"
-    //     >
-    //       {item.text}
-    //     </Checkbox>
-    //   </li>
-    // ));
+
+    const listTodo = todoItems.map((item, i) => (
+      <li key={`todo-number-${i}`} className="todo-list__item">
+        <Checkbox
+          onChange={() => handleTodoItemDone(i)}
+          checked={item.isDone}
+          className="todo-list__checkbox"
+        >
+          {item.value}
+        </Checkbox>
+      </li>
+    ));
 
     return (
       <div className="todo-list">
         <ul>
-          {todoItemsList}
+          {listTodo}
         </ul>
       </div>
     )

@@ -20,6 +20,7 @@ class App extends Component {
     };
 
     this._handleTodoItemAdd = this._handleTodoItemAdd.bind(this);
+    this._handleTodoItemDone = this._handleTodoItemDone.bind(this);
   }
 
   _handleTodoItemAdd(todoItemVal) {
@@ -32,6 +33,18 @@ class App extends Component {
     this.setState({
       todoItems: [...this.state.todoItems, todoItem]
     });
+  }
+
+  _handleTodoItemDone(itemOrderNumber) {
+
+    let {todoItems} = this.state;
+
+    todoItems[itemOrderNumber].isDone = !todoItems[itemOrderNumber].isDone;
+
+    this.setState({
+      todoItems: todoItems
+    });
+
   }
 
   render() {
@@ -47,6 +60,7 @@ class App extends Component {
 
               <TodoList
                 todoItems={this.state.todoItems}
+                handleTodoItemDone={this._handleTodoItemDone}
               />
 
             </div>
