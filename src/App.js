@@ -20,7 +20,7 @@ class App extends Component {
     };
 
     this._handleTodoItemAdd = this._handleTodoItemAdd.bind(this);
-    this._handleTodoItemDone = this._handleTodoItemDone.bind(this);
+    this._handleTodoItemToggle = this._handleTodoItemToggle.bind(this);
   }
 
   /**
