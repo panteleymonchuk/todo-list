@@ -3,11 +3,8 @@ import TodoList from './features/TodoList/TodoList';
 import TodoInput from './features/TodoInput/TodoInput.js';
 
 import {
-  Checkbox,
   Col,
   Row,
-  FormGroup,
-  Button,
 } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.min.css';
@@ -38,7 +35,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.todoItems);
     return (
       <div className="App">
         <Row align="center">
@@ -47,6 +43,10 @@ class App extends Component {
 
               <TodoInput
                 handleTodoItemAdd={this._handleTodoItemAdd}
+              />
+
+              <TodoList
+                todoItems={this.state.todoItems}
               />
 
             </div>

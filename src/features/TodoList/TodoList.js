@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import {
+  Checkbox,
+  Col,
+  Row,
+  FormGroup,
+  Button,
+} from 'react-bootstrap';
 
 class TodoList extends Component {
 
   render() {
 
-    const {listTodo} = this.props;
+    const {todoItems} = this.props;
+
+    // const todoItemsList =
+
+    console.log(todoItems);
     //
     // const listTodo = todoList.filter(item => !item.isDone).map((item, i) => (
     //   <li key={`todo-number-${i}`} className="todo-list__item">
@@ -22,15 +32,7 @@ class TodoList extends Component {
     return (
       <div className="todo-list">
         <ul>
-          {/*{*/}
-            {/*!!todoList.length ? (*/}
-              {/*<ul>{listTodo}</ul>*/}
-            {/*) : (*/}
-              {/*<div>*/}
-                {/*empty*/}
-              {/*</div>*/}
-            {/*)*/}
-          {/*}*/}
+          {todoItemsList}
         </ul>
       </div>
     )
